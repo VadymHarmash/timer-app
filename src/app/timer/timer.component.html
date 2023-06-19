@@ -1,0 +1,13 @@
+<div class="timer">
+    <div class="container">
+        <h1>Timer</h1>
+        <div class="timer__wrapper">
+            <div class="timer__time">{{ hour | number: '2.0' }}:{{ minute | number: '2.0' }}:{{ second | number: '2.0' }}</div>
+            <div class="timer__buttons">
+                <button (click)="startTimer()">{{ startToggle ? 'Stop' : 'Start' }}</button>
+                <button (click)="waitTimer()">{{ waitToggle ? 'Continue' : 'Wait' }}</button>
+                <button (click)="resetTimer()">Reset</button>
+            </div>
+        </div>
+    </div>
+</div>
