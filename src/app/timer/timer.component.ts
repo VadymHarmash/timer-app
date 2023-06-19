@@ -15,10 +15,10 @@ export class TimerComponent {
   public waitToggle: boolean = false
 
   public timerInterval: Observable<number> = interval(1000)
-  
+
   private subscription$: Subscription
 
-  startTimer(): void {
+  public startTimer(): void {
     if (!this.startToggle) {
       this.startToggle = !this.startToggle
       this.subscription$ = this.timerInterval.subscribe(() => {
@@ -33,7 +33,7 @@ export class TimerComponent {
     }
   }
 
-  waitTimer(): void {
+  public waitTimer(): void {
     if (this.startToggle === true) {
       this.waitToggle = !this.waitToggle
       this.waitToggle === true ? this.subscription$.unsubscribe() : this.subscription$ = this.timerInterval.subscribe(() => {
@@ -46,35 +46,32 @@ export class TimerComponent {
     }
   }
 
-  resetTimer(): void {
-    this.resetData()
-    if (this.subscription$) {
-      this.subscription$.unsubscribe()
-    }
+  public resetTimer(): void {
+    this.hour = 0
+    this.minute = 0
+    this.second = 0
   }
 
-  checkSeconds(): void {
+  public checkSeconds(): void {
     if (this.second < 60) {
-      this.minute = this.minute
+      null
     } else {
       this.second = 0
       this.minute++
     }
   }
 
-  checkMinutes(): void {
+  public checkMinutes(): void {
     if (this.minute < 60) {
-      this.hour = this.hour
+      null
     } else {
       this.minute = 0
       this.hour++
     }
   }
 
-  resetData(): void {
-    this.hour = 0
-    this.minute = 0
-    this.second = 0
+  public resetData(): void {
+    this.resetTimer()
     this.startToggle = false
     this.waitToggle = false
   }
