@@ -16,12 +16,12 @@ export class TimerComponent {
 
   public timerInterval: Observable<number> = interval(1000)
 
-  private subscription$: Subscription
+  private _subscription: Subscription
 
   public startTimer(): void {
     if (!this.startToggle) {
       this.startToggle = !this.startToggle
-      this.subscription$ = this.timerInterval.subscribe(() => {
+      this._subscription = this.timerInterval.subscribe(() => {
         this.second++
         this.checkSeconds()
         this.checkMinutes()
@@ -29,20 +29,20 @@ export class TimerComponent {
     } else {
       this.startToggle = !this.startToggle
       this.resetData()
-      this.subscription$.unsubscribe()
+      this._subscription.unsubscribe()
     }
   }
 
   public waitTimer(): void {
     if (this.startToggle === true) {
       this.waitToggle = !this.waitToggle
-      this.waitToggle === true ? this.subscription$.unsubscribe() : this.subscription$ = this.timerInterval.subscribe(() => {
+      this.waitToggle === true ? this._subscription.unsubscribe() : this._subscription = this.timerInterval.subscribe(() => {
         this.second++
         this.checkSeconds()
         this.checkMinutes()
       })
     } else {
-      alert("You cannot to click this button until you start timer")
+      alert("You cannot to click this button until you start a timer")
     }
   }
 
